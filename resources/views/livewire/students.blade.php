@@ -41,18 +41,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($students as $student )
-                                    <tr>
-                                        <td>{{$student->firstname}}</td>
-                                        <td>{{$student->lastname}}</td>
-                                        <td>{{$student->email}}</td>
-                                        <td>{{$student->phone}}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editstudent" wire:click.prevent="edit({{$student->id}})">Edit</button>
-                                            <button type="button" class="btn btn-danger" wire:click.prevent="delete({{$student->id}})">Delete</button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                    @if($students)
+                                        @foreach ($students as $student )
+                                        <tr>
+                                            <td>{{$student->firstname}}</td>
+                                            <td>{{$student->lastname}}</td>
+                                            <td>{{$student->email}}</td>
+                                            <td>{{$student->phone}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editstudent" wire:click.prevent="edit({{$student->id}})">Edit</button>
+                                                <button type="button" class="btn btn-danger" wire:click.prevent="delete({{$student->id}})">Delete</button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    @endif
+                                    <p>No Students yet!</p>
                                 </tbody>
                             </table>
                             {{$students->links()}}
