@@ -54,8 +54,9 @@
                                             </td>
                                         </tr>
                                         @endforeach
+                                    @else
+                                    <p>No students yet!</p>
                                     @endif
-                                    <p>No Students yet!</p>
                                 </tbody>
                             </table>
                             {{$students->links()}}

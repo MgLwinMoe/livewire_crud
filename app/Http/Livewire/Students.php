@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Student;
+use Illuminate\Support\Facades\Log;
 use Livewire\WithPagination;
 
 class Students extends Component
@@ -85,12 +86,17 @@ class Students extends Component
 
     public function render()
     {
+        // Log::info("Hey I was here!");
         $searchTerm = '%'. $this->searchTerm . '%';
-        $students = Student::where('firstname', 'LIKE', $searchTerm)
+        if($searchTerm){
+            $students = Student::where('firstname', 'LIKE', $searchTerm)
                     ->orWhere('lastname', 'LIKE', $searchTerm)
                     ->orWhere('email', 'LIKE', $searchTerm)
                     ->orWhere('phone', 'LIKE', $searchTerm)
                     ->orderBy('id', 'DESC')->paginate(5);
+        }else {
+            $students = Student::all();
+        }
         return view('livewire.students',['students' => $students]);
     }
 }
